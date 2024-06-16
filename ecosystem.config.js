@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'dynamic_config_sys',
       script: 'dist/main.js',
-      instances: '2',
+      instances: '1',
       exec_mode: 'cluster',
       autorestart: true,
       watch: false,

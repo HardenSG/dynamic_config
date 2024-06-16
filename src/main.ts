@@ -5,11 +5,24 @@ import { NestExpressApplication } from '@nestjs/platform-express'
 import { ResInter } from './core/interceptor/response'
 import { ErrorFilter } from './core/interceptor/catchError'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
+import { readFileSync } from 'fs'
 // import { UserGuard } from './modules/base1/user.guard'
 
 async function bootstrap() {
+  const createOpts = {}
+  if (process.env.ENV !== 'dev') {
+    Object.assign(createOpts, {
+      httpsOptions: {
+        key: readFileSync('/opt/cert/805807.cn.key'),
+        cert: readFileSync('/opt/cert/805807.cn_bundle.pem'),
+      },
+    })
+  }
+
   /** 创建根组件 */
-  const app = await NestFactory.create<NestExpressApplication>(AppModule)
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    ...createOpts,
+  })
   /** 开启跨域 */
   app.enableCors()
   /** 开启版本，例如 api/v1.1/initByXid */
