@@ -1,0 +1,3 @@
+# docker ignore file
+.git
+node_modules
