@@ -19,8 +19,8 @@ services:
   dynamic_config:
     container_name: dynamic_config
     image: registry.cn-hangzhou.aliyuncs.com/hardensg/dynamic_config:latest
-    expose:
-      - 3000
+    ports:
+      - "3000:3000"
     networks:
       - same_network
     depends_on:

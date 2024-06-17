@@ -6,7 +6,7 @@ export const mongoDB: TypeOrmModuleOptions = {
   type: 'mongodb',
   username: 'config',
   password: 'password',
-  host: '127.0.0.1',
+  host: 'mongo',
   port: 27017,
   database: 'dynamic_config',
   retryAttempts: 10,
