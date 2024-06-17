@@ -1,0 +1,35 @@
+version: '3.8'
+name: dynamic_config
+
+services:
+  mongo: 
+    container_name: docker_mongodb
+    image: mongo:latest
+    # 数据卷
+    volumes: 
+      - mongo-data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    ports:
+      - "27017:27017"
+    # 除非手动停止docker，否则一直重启
+    restart: unless-stopped
+    networks:
+      - same_network
+
+  dynamic_config:
+    container_name: dynamic_config
+    image: registry.cn-hangzhou.aliyuncs.com/hardensg/dynamic_config:latest
+    expose:
+      - 3000
+    networks:
+      - same_network
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
+
+networks:
+  same_network:
+    external: true
+    name: dynamic_config_same_network

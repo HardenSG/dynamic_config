@@ -1,6 +1,5 @@
 # 基于node@16.20.2
-FROM alpine:latest
-RUN apk add --no-cache --update nodejs npm
+FROM node:16
 
 # 创建一个目录
 RUN mkdir -p /usr/src/nest/

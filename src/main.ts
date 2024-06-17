@@ -11,12 +11,19 @@ import { readFileSync } from 'fs'
 async function bootstrap() {
   const createOpts = {}
   if (process.env.ENV !== 'dev') {
-    Object.assign(createOpts, {
-      httpsOptions: {
-        key: readFileSync('/opt/cert/805807.cn.key'),
-        cert: readFileSync('/opt/cert/805807.cn_bundle.pem'),
-      },
-    })
+    try {
+      const isTLSExist = readFileSync('/opt/cert/805807.cn.key')
+      if (isTLSExist.length > 0) {
+        Object.assign(createOpts, {
+          httpsOptions: {
+            key: readFileSync('/opt/cert/805807.cn.key'),
+            cert: readFileSync('/opt/cert/805807.cn_bundle.pem'),
+          },
+        })
+      }
+    } catch {
+      console.log(' === 不存在证书 === ')
+    }
   }
 
   /** 创建根组件 */
