@@ -22,7 +22,7 @@ COPY Dockerfile /usr/src/nest/dist
 # 全局安装 PM2
 RUN npm install pm2 -g
 
-EXPOSE 3001
+EXPOSE 3000
 
 # 使用 PM2 启动应用
 CMD ["pm2-runtime", "start", "ecosystem.config.js"]
