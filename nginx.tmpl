@@ -1,0 +1,19 @@
+upstream node-server {
+{{ range $i, $container := where $ "State.Running" "true" }}
+    server {{ $container.Name }}:3000 max_fails=3 fail_timeout=30s;
+{{ end }}
+}
+
+server {
+    listen 80;
+    server_name localhost;
+
+    location / {
+        proxy_pass http://node-server;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+    }
+}
