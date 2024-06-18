@@ -25,4 +25,4 @@ RUN npm install pm2 -g
 EXPOSE 3000
 
 # 使用 PM2 启动应用
-CMD ["pm2-runtime", "--name", "dynamic_config", "npm", "--", "run", "start:prod"]
+CMD ["pm2-runtime", "start", "ecosystem.config.js"]
