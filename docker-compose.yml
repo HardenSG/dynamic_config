@@ -16,11 +16,11 @@ services:
       - same_network
 
   dynamic_config:
-    image: registry.cn-hangzhou.aliyuncs.com/hardensg/dynamic_config:latest
+    image: registry.cn-hangzhou.aliyuncs.com/hardensg/dynamic_config:v1.0-hack
     # ports:
     #   - "3000:3000"
     expose:
-      - "3000" # 如果是负载均衡就不能启动固定端口映射
+      - "3001" # 如果是负载均衡就不能启动固定端口映射
     environment:
       - LANG=C.UTF-8 # 打印的内容编码为UTF8
     volumes: 
