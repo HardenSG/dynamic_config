@@ -5,30 +5,30 @@ import { NestExpressApplication } from '@nestjs/platform-express'
 import { ResInter } from './core/interceptor/response'
 import { ErrorFilter } from './core/interceptor/catchError'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
-import { readFileSync } from 'fs'
+// import { readFileSync } from 'fs'
 // import { UserGuard } from './modules/base1/user.guard'
 
 async function bootstrap() {
-  const createOpts = {}
-  if (process.env.ENV !== 'dev') {
-    try {
-      const isTLSExist = readFileSync('/opt/cert/hardensg.cn.key')
-      if (isTLSExist.length > 0) {
-        Object.assign(createOpts, {
-          httpsOptions: {
-            key: readFileSync('/opt/cert/hardensg.cn.key'),
-            cert: readFileSync('/opt/cert/hardensg.cn.pem'),
-          },
-        })
-      }
-    } catch {
-      console.log(' === 不存在证书 === ')
-    }
-  }
+  // const createOpts = {}
+  // if (process.env.ENV !== 'dev') {
+  //   try {
+  //     const isTLSExist = readFileSync('/opt/cert/hardensg.cn.key')
+  //     if (isTLSExist.length > 0) {
+  //       Object.assign(createOpts, {
+  //         httpsOptions: {
+  //           key: readFileSync('/opt/cert/hardensg.cn.key'),
+  //           cert: readFileSync('/opt/cert/hardensg.cn.pem'),
+  //         },
+  //       })
+  //     }
+  //   } catch {
+  //     console.log(' === 不存在证书 === ')
+  //   }
+  // }
 
   /** 创建根组件 */
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    ...createOpts,
+    // ...createOpts,
   })
   /** 开启跨域 */
   app.enableCors()

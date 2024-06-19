@@ -38,6 +38,7 @@ services:
     restart: unless-stopped
     volumes: 
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /opt/cert:/opt/cert
     networks: 
       - same_network
     links: # 设置 node 服务别名，其实是设置/etc/hosts的域名解析
