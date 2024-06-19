@@ -12,12 +12,12 @@ async function bootstrap() {
   const createOpts = {}
   if (process.env.ENV !== 'dev') {
     try {
-      const isTLSExist = readFileSync('/opt/cert/805807.cn.key')
+      const isTLSExist = readFileSync('/opt/cert/hardensg.cn.key')
       if (isTLSExist.length > 0) {
         Object.assign(createOpts, {
           httpsOptions: {
-            key: readFileSync('/opt/cert/805807.cn.key'),
-            cert: readFileSync('/opt/cert/805807.cn_bundle.pem'),
+            key: readFileSync('/opt/cert/hardensg.cn.key'),
+            cert: readFileSync('/opt/cert/hardensg.cn.pem'),
           },
         })
       }
