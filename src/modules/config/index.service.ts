@@ -29,10 +29,18 @@ export class IndexService {
     }
   }
 
-  saveUser(config: ConfigDTO) {
+  async saveConfig(config: ConfigDTO) {
     try {
       const uuid = config.uuid ?? UUID.v4()
-      this.configRepository.save({
+      /** TODO: 后面加redis从缓存里面取配置 */
+      const _config =
+        (await this.configRepository.findOne({
+          where: {
+            uuid,
+          },
+        })) ?? {}
+      await this.configRepository.save({
+        ..._config,
         ...config,
         uuid,
         date: new Date(),

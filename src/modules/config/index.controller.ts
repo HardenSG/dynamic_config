@@ -25,7 +25,7 @@ export class IndexController {
     type: ConfigDTO,
   })
   saveConfig(@Body(ConfigPipe) body: ConfigDTO) {
-    return this.indexService.saveUser(body)
+    return this.indexService.saveConfig(body)
   }
 
   @Get()
