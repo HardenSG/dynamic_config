@@ -53,7 +53,6 @@ export class IndexService {
 
   // /** 获取列表 */
   async getList({ size, page }: PageSelect) {
-    console.log(size, page)
     try {
       const _page = page - 1 <= 0 ? 0 : page - 1
       const lists = await this.configRepository.find({

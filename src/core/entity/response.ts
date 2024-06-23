@@ -1,7 +1,7 @@
 export enum RES_CODE {
-  SUCCESS = 0,
-  PASS_ERROR = 400,
-  SER_ERROR = 500,
+  OK = 0,
+  PARAMS_ERROR = 400,
+  SERVER_ERROR = 500,
 }
 
 export class BizResponse<T> {

@@ -7,10 +7,10 @@ import {
 import { IndexModule } from './modules/config/index.module'
 import { LoggerMiddleware } from './core/middleware/logger'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { mongoDB } from './config/db.config'
+import { loadConfig } from './config'
 
 @Module({
-  imports: [TypeOrmModule.forRoot(mongoDB), IndexModule],
+  imports: [TypeOrmModule.forRoot(loadConfig().db.mongo), IndexModule],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
