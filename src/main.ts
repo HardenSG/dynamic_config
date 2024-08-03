@@ -35,5 +35,6 @@ async function bootstrap() {
   SwaggerModule.setup('api-docs', app, doc)
   /** swagger END */
   await app.listen(3000)
+  console.log(' === 已启动 === ')
 }
 bootstrap()

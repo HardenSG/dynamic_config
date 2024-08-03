@@ -8,9 +8,14 @@ import { IndexModule } from './modules/config/index.module'
 import { LoggerMiddleware } from './core/middleware/logger'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { loadConfig } from './config'
+import { LoggerMicroModule } from './modules/micro/Logger/index.module'
 
 @Module({
-  imports: [TypeOrmModule.forRoot(loadConfig().db.mongo), IndexModule],
+  imports: [
+    LoggerMicroModule,
+    TypeOrmModule.forRoot(loadConfig().db.mongo),
+    IndexModule,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
